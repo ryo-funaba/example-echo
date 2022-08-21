@@ -34,12 +34,13 @@ make up
 ```bash
 $ make help
 
-exec    Execute a command in a running app container
-build   Build docker image to local development
-up      Do docker compose up in detached mode
-down    Do docker compose down
-restart Do docker compose restart
-logs    Tail docker compose logs
-ps      Check container status
-help    Show options
+help                 Show options
+build                Build docker container
+up                   Do docker compose up in detached mode
+down                 Do docker compose down
+restart              Do docker compose restart
+exec                 Execute a command in a running app container
+logs                 Tail docker compose logs
+ps                   Check container status
+setEnv               Set Env to use SSH in Docker container
 ```

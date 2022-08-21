@@ -1,13 +1,14 @@
 version: "3.9"
 services:
   app:
+    image: example_serverless_go
     build:
-      context: Docker
+      context: .
       dockerfile: Dockerfile
+      target: builder
     container_name: example_serverless_go
     hostname: example_serverless_go
-    image: example_serverless_go
     tty: true
     volumes:
-      - .:/example_serverless_go
-    working_dir: /example_serverless_go
+      - .:/home/tempUser/example_serverless_go
+    working_dir: /home/tempUser/example_serverless_go
