@@ -1,0 +1,10 @@
+bin
+config
+Makefile
+README.md
+.DS_Store
+.git
+.github
+.gitignore
+.golangci.yml
+.vscode
