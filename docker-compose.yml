@@ -7,8 +7,34 @@ services:
       dockerfile: Dockerfile
       target: builder
     container_name: example_serverless_go
+    env_file:
+      - Docker/local.env
     hostname: example_serverless_go
     tty: true
     volumes:
       - .:/home/tempUser/example_serverless_go
     working_dir: /home/tempUser/example_serverless_go
+
+  db:
+    image: mysql:8.0.30
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --default-authentication-plugin=mysql_native_password
+      - --innodb-buffer-pool-size=1024M
+    container_name: db
+    environment:
+      BUILD_VIEWS: "true"
+      MYSQL_DATABASE: sample
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: sample
+      LANG: ja_JP.UTF-8
+    platform: linux/x86_64
+    ports:
+      - 127.0.0.1:33306:3306
+    restart: always
+    # TODO: 今後DB用の初期データを作成する
+    # volumes:
+    #   - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    #   - ./docker/mysql/conf/my.cnf:/etc/my.cnf
