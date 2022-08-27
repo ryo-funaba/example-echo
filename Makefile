@@ -1,4 +1,8 @@
-.PHONY: help build up down restart exec logs ps setEnv
+.PHONY: help build up down restart exec logs ps setEnv lint dlint
+
+BASE_BRANCH="main"
+GO_VERSION=1.19.0
+TARGET_FILE=./...
 
 help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
@@ -26,3 +30,13 @@ ps: ## Check container status
 
 setEnv: ## Set Env to use SSH in Docker container
 	export COMPOSE_DOCKER_CLI_BUILD=1 export DOCKER_BUILDKIT=1
+
+lint: ## Lint all files
+	golangci-lint run --config=.golangci.yml $(TARGET_FILE)
+
+dlint: ## Lint difference files
+	golangci-lint run --config=.golangci.yml `$(call diff)`
+
+define diff ## Get directory with change differences
+	git diff --name-only --diff-filter=ACMRT | grep .go$ | xargs -I{} dirname {} | sort | uniq
+endef
