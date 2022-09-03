@@ -27,7 +27,8 @@
 - 前提条件
 
   - GitHub と SSH 接続する設定を済ませていること
-    - `ssh-add -A`を実行済みであること
+    - ssh-agent に GitHub の秘密鍵を登録していること
+      - `ssh-add ~/.ssh/<your_github_id_rsa>`
   - Docker(v20.10.17 以上) がインストールされていること
   - Docker compose(v2.7.0 以上) がインストールされていること
 
@@ -42,6 +43,9 @@
 3. Docker image を作成
    - 初回はキャッシュがないため、1 分ほど時間がかかる想定
    - `go.mod`のライブラリのバージョンを変更した際も image の作成からやり直す
+   - `git@github.com: Permission denied (publickey)`というエラーが発生した場合
+     - ssh-agent に GitHub の秘密鍵を登録する
+       - `ssh-add ~/.ssh/<your_github_id_rsa>`
    ```bash
    make build
    ```
