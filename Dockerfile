@@ -8,12 +8,14 @@ FROM golang:1.19.0-alpine3.16 AS builder
 #パッケージをインストール
 RUN apk update && \
     apk --no-cache add \
-    curl=7.83.1-r2 \
-    git=2.36.2-r0 \
+    curl=7.83.1-r4 \
+    gcc=11.2.1_git20220219-r2 \
+    git=2.36.3-r0 \
     make=4.3-r0 \
+    musl-dev=1.2.3-r2 \
     npm=8.10.0-r0 \
     openssh=9.0_p1-r2 \
-    tzdata=2022c-r0 \
+    tzdata=2022f-r1 \
     vim=8.2.5000-r0 \
     zsh=5.8.1-r4
 
