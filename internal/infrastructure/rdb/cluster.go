@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 
+	"github.com/ryo-funaba/example-serverless-go/pkg/enum"
 	"github.com/ryo-funaba/example-serverless-go/pkg/errorutil"
 	"github.com/volatiletech/sqlboiler/v4/boil"
 )
@@ -16,10 +17,10 @@ type cluster struct {
 }
 
 type Cluster interface {
-	GetConnection(conn ConnectionType, database string) (*sql.DB, error)
-	AddConnection(conn ConnectionType, database, driver, dns string) error
-	AddConnectionForTest(conn ConnectionType, database, driver, dns string) error
-	GetBoilCtxExecutor(ctx context.Context, conn ConnectionType, database string) (boil.ContextExecutor, error)
+	GetConnection(conn enum.ConnectionType, database string) (*sql.DB, error)
+	AddConnection(conn enum.ConnectionType, database, driver, dns string) error
+	AddConnectionForTest(conn enum.ConnectionType, database, driver, dns string) error
+	GetBoilCtxExecutor(ctx context.Context, conn enum.ConnectionType, database string) (boil.ContextExecutor, error)
 	SetTxInCtx(ctx context.Context, tx *sql.Tx) context.Context
 }
 
@@ -30,7 +31,7 @@ func NewCluster(isDebugMode bool) Cluster {
 	return c
 }
 
-func (c *cluster) GetConnection(conn ConnectionType, database string) (*sql.DB, error) {
+func (c *cluster) GetConnection(conn enum.ConnectionType, database string) (*sql.DB, error) {
 	con, ok := c.Pools[database]
 	if !ok {
 		return nil, errorutil.Errorf(errorutil.Unknown, "get a connection from pools failed")
@@ -39,7 +40,7 @@ func (c *cluster) GetConnection(conn ConnectionType, database string) (*sql.DB, 
 	return con, nil
 }
 
-func (c *cluster) AddConnection(conn ConnectionType, database, driver, dns string) error {
+func (c *cluster) AddConnection(conn enum.ConnectionType, database, driver, dns string) error {
 	con, err := sql.Open(driver, dns)
 	if err != nil {
 		return errorutil.Errorf(errorutil.Unknown, err.Error())
@@ -58,7 +59,7 @@ func (c *cluster) AddConnection(conn ConnectionType, database, driver, dns strin
 	return nil
 }
 
-func (c *cluster) AddConnectionForTest(conn ConnectionType, database, driver, dns string) error {
+func (c *cluster) AddConnectionForTest(conn enum.ConnectionType, database, driver, dns string) error {
 	con, err := sql.Open(driver, dns)
 	if err != nil {
 		return errorutil.Errorf(errorutil.Unknown, err.Error())
@@ -77,7 +78,7 @@ func (c *cluster) AddConnectionForTest(conn ConnectionType, database, driver, dn
 	return nil
 }
 
-func (c *cluster) GetBoilCtxExecutor(ctx context.Context, conn ConnectionType, database string) (boil.ContextExecutor, error) {
+func (c *cluster) GetBoilCtxExecutor(ctx context.Context, conn enum.ConnectionType, database string) (boil.ContextExecutor, error) {
 	tx, ok := ctx.Value(txCtxKey).(*sql.Tx)
 	if !ok {
 		con, err := c.GetConnection(conn, database)
