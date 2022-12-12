@@ -5,7 +5,7 @@ import (
 	"database/sql"
 
 	"github.com/ryo-funaba/example-serverless-go/pkg/errorutil"
-	"github.com/volatiletech/sqlboiler/boil"
+	"github.com/volatiletech/sqlboiler/v4/boil"
 )
 
 const txCtxKey = "transaction_context_key"
