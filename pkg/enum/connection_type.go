@@ -1,4 +1,4 @@
-package rdb
+package enum
 
 type ConnectionType int
 

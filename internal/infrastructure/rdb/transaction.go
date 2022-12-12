@@ -3,6 +3,7 @@ package rdb
 import (
 	"context"
 
+	"github.com/ryo-funaba/example-serverless-go/pkg/enum"
 	"github.com/ryo-funaba/example-serverless-go/pkg/errorutil"
 )
 
@@ -31,7 +32,7 @@ func (r *transaction) ExecTx(
 		f func(ctx context.Context) error,
 		database string,
 	) error {
-	con, err := r.rdb.GetConnection(Primary, database)
+	con, err := r.rdb.GetConnection(enum.Primary, database)
 	if err != nil {
 		return errorutil.Errorf(errorutil.Unknown, err.Error())
 	}
