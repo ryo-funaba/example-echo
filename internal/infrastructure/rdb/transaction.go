@@ -5,6 +5,7 @@ import (
 
 	"github.com/ryo-funaba/example-serverless-go/pkg/enum"
 	"github.com/ryo-funaba/example-serverless-go/pkg/errorutil"
+	"github.com/ryo-funaba/example-serverless-go/pkg/logutil"
 )
 
 const transactionStructName = "Transaction"
@@ -27,11 +28,9 @@ func NewTransaction(isDebugMode bool) Transaction {
 	return &transaction{c}
 }
 
-func (r *transaction) ExecTx(
-		ctx context.Context,
-		f func(ctx context.Context) error,
-		database string,
-	) error {
+func (r *transaction) ExecTx(ctx context.Context, f func(ctx context.Context) error, database string) error {
+	logutil.PrintFuncName(transactionStructName, "ExecTx")
+
 	con, err := r.rdb.GetConnection(enum.Primary, database)
 	if err != nil {
 		return errorutil.Errorf(errorutil.Unknown, err.Error())
