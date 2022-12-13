@@ -9,7 +9,9 @@ import (
 	"github.com/volatiletech/sqlboiler/v4/boil"
 )
 
-const txCtxKey = "transaction_context_key"
+type txCtxKey int
+
+const ctxKey txCtxKey = iota
 
 type cluster struct {
 	Pools       map[string]*sql.DB
@@ -79,7 +81,7 @@ func (c *cluster) AddConnectionForTest(conn enum.ConnectionType, database, drive
 }
 
 func (c *cluster) GetBoilCtxExecutor(ctx context.Context, conn enum.ConnectionType, database string) (boil.ContextExecutor, error) {
-	tx, ok := ctx.Value(txCtxKey).(*sql.Tx)
+	tx, ok := ctx.Value(ctxKey).(*sql.Tx)
 	if !ok {
 		con, err := c.GetConnection(conn, database)
 		if err != nil {
@@ -93,7 +95,7 @@ func (c *cluster) GetBoilCtxExecutor(ctx context.Context, conn enum.ConnectionTy
 }
 
 func (c *cluster) SetTxInCtx(ctx context.Context, tx *sql.Tx) context.Context {
-	v := context.WithValue(ctx, txCtxKey, tx)
+	v := context.WithValue(ctx, ctxKey, tx)
 
 	return v
 }

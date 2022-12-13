@@ -11,21 +11,19 @@ type customError struct {
 	err  error
 }
 
-func (e customError) Error() string {
-	return fmt.Sprintf("%s", e.err)
-}
-
-func ErrorCode(err error) Code {
+func ErrorCode(err error) int {
 	if err == nil {
-		return OK
+		return OK.Number()
 	}
 
-	e, ok := err.(customError)
+	var e customError
+
+	ok := errors.As(err, &e)
 	if ok {
-		return e.code
+		return e.code.Number()
 	}
 
-	return Unknown
+	return Unknown.Number()
 }
 
 func Errorf(code Code, format string, args ...interface{}) error {
@@ -41,6 +39,10 @@ func Errorf(code Code, format string, args ...interface{}) error {
 	err.PrintCodeAndMsg()
 
 	return err
+}
+
+func (e customError) Error() string {
+	return fmt.Sprintf("%s", e.err)
 }
 
 func (e customError) PrintCodeAndMsg() {

@@ -29,4 +29,3 @@ func (c Code) Number() int {
 		return 500
 	}
 }
-
