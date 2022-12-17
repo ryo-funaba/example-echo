@@ -4,7 +4,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/request"
 	dynamoDB "github.com/aws/aws-sdk-go/service/dynamodb"
-	"github.com/ryo-funaba/example-serverless-go/pkg/errorutil"
+	"github.com/ryo-funaba/example-serverless-go/internal/pkg/errorutil"
 )
 
 type mockDynamodbRepository struct {

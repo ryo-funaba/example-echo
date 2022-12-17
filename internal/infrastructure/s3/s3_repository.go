@@ -3,8 +3,8 @@ package s3
 import (
 	"fmt"
 
-	"github.com/ryo-funaba/example-serverless-go/pkg/errorutil"
-	"github.com/ryo-funaba/example-serverless-go/pkg/logutil"
+	"github.com/ryo-funaba/example-serverless-go/internal/pkg/errorutil"
+	"github.com/ryo-funaba/example-serverless-go/internal/pkg/logutil"
 
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/aws/aws-sdk-go/service/s3/s3iface"

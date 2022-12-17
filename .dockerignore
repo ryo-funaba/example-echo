@@ -1,10 +1,11 @@
+.github
+.vscode
 bin
-config
-Makefile
-README.md
+Docker
 .DS_Store
 .git
-.github
 .gitignore
 .golangci.yml
-.vscode
+docker-compose.yml
+Makefile
+README.md

@@ -1,7 +1,7 @@
 package s3
 
 import (
-	"github.com/ryo-funaba/example-serverless-go/pkg/errorutil"
+	"github.com/ryo-funaba/example-serverless-go/internal/pkg/errorutil"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/request"
