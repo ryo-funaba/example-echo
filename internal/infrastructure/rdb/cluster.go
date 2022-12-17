@@ -4,8 +4,8 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/ryo-funaba/example-serverless-go/pkg/enum"
-	"github.com/ryo-funaba/example-serverless-go/pkg/errorutil"
+	"github.com/ryo-funaba/example-serverless-go/internal/pkg/enum"
+	"github.com/ryo-funaba/example-serverless-go/internal/pkg/errorutil"
 	"github.com/volatiletech/sqlboiler/v4/boil"
 )
 

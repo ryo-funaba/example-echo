@@ -5,8 +5,8 @@ import (
 
 	dynamoDB "github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
-	"github.com/ryo-funaba/example-serverless-go/pkg/errorutil"
-	"github.com/ryo-funaba/example-serverless-go/pkg/logutil"
+	"github.com/ryo-funaba/example-serverless-go/internal/pkg/errorutil"
+	"github.com/ryo-funaba/example-serverless-go/internal/pkg/logutil"
 )
 
 const dynamodbRepositoryStructName = "dynamodbRepository"

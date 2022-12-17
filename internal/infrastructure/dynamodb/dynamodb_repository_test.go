@@ -9,7 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
 	"github.com/google/go-cmp/cmp"
-	"github.com/ryo-funaba/example-serverless-go/pkg/errorutil"
+	"github.com/ryo-funaba/example-serverless-go/internal/pkg/errorutil"
 	"google.golang.org/protobuf/testing/protocmp"
 )
 
