@@ -16,25 +16,13 @@ services:
     working_dir: /home/tempUser/example_serverless_go
 
   db:
-    image: mysql:8.0.30
-    command:
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_unicode_ci
-      - --default-authentication-plugin=mysql_native_password
-      - --innodb-buffer-pool-size=1024M
-    container_name: db
+    image: genschsa/mysql-employees
+    container_name: mysql-employees
     environment:
-      BUILD_VIEWS: "true"
-      MYSQL_DATABASE: sample
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: sample
-      LANG: ja_JP.UTF-8
+      MYSQL_ROOT_PASSWORD: college
     platform: linux/x86_64
     ports:
-      - 127.0.0.1:33306:3306
+      - 127.0.0.1:3306:3306
     restart: always
-    # TODO: 今後DB用の初期データを作成する
-    # volumes:
-    #   - ./docker/mysql/init:/docker-entrypoint-initdb.d
-    #   - ./docker/mysql/conf/my.cnf:/etc/my.cnf
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
