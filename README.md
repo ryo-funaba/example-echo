@@ -2,7 +2,7 @@
 
 このリポジトリは Go を使用した Serverless Framework のサンプルコードリポジトリです。
 
-## 技術スタック
+## ⚙️技術スタック
 
 - 言語
   - Go@1.19.0
@@ -22,72 +22,63 @@
   - 本番環境
     - Lambda
 
-# 環境構築
+## 🔨環境構築
 
 - 前提条件
-
-  - GitHub と SSH 接続する設定を済ませていること
-    - ssh-agent に GitHub の秘密鍵を登録していること
-      - `ssh-add ~/.ssh/<your_github_id_rsa>`
   - Docker(v20.10.17 以上) がインストールされていること
   - Docker compose(v2.7.0 以上) がインストールされていること
 
 1. リポジトリをクローン
+
    ```bash
    git clone github:ryo-funaba/example-serverless-go.git
    ```
+
 2. トップディレクトリに移動
+
    ```bash
    cd example-serverless-go
    ```
+
 3. Docker image を作成
-   - 初回はキャッシュがないため、1 分ほど時間がかかる想定
-   - `go.mod`のライブラリのバージョンを変更した際も image の作成からやり直す
-   - `git@github.com: Permission denied (publickey)`というエラーが発生した場合
-     - ssh-agent に GitHub の秘密鍵を登録する
-       - `ssh-add ~/.ssh/<your_github_id_rsa>`
+
    ```bash
    make build
    ```
+
 4. Docker Compose を起動
+
    ```bash
    make up
    ```
-5. Docker コンテナに入る
-   - 基本的にビルドや動作確認はコンテナ内で行う
-   ```bash
-   make exec
-   ```
-6. コンテナ内で Shell を再起動
-   - szh は `source ~/.zshrc`のエイリアス
-   - Shell を再起動すると、プロンプトに現在のブランチ名が表示されるようになる
-   ```bash
-   szh
-   ```
-7. 以上
 
-# 動作確認方法
+5. 以上
+
+## 🔍動作確認
 
 （これから書く）
 
-## Lint の実行
+## 💅Lint の実行
 
 - 全ファイル対象
+
   ```bash
   make lint
   ```
+
 - 特定ファイル対象
+
   ```bash
   make lint TARGET_FILE='ファイルの相対パス'
   ```
+
 - 差分対象
+
   ```bash
   make dlint
   ```
 
-# make コマンドについて
-
-`make help`を実行すると、用意された make コマンド一覧を確認できます。
+## 💁‍♂️make コマンド一覧
 
 ```bash
 $ make help
