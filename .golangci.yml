@@ -7,7 +7,6 @@ linters:
     - asciicheck
     - bodyclose
     - cyclop
-    - deadcode
     - dogsled
     - dupl
     - durationcheck
@@ -45,7 +44,6 @@ linters:
     - unconvert
     - unparam
     - unused
-    - varcheck
     - whitespace
     - wsl
 
