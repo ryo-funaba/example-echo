@@ -22,8 +22,9 @@ RUN apk update && \
 # タイムゾーンの設定
 RUN cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
-# Serverless Frameworkをインストール
-RUN npm install -g serverless@3.22.0
+# Serverless Frameworkとそのプラグインをインストール
+RUN npm install -g serverless@3.22.0 && \
+npm install serverless-offline@12.0.3 --save-dev
 
 # 非rootユーザーを作成
 ENV USER tempUser
