@@ -32,10 +32,10 @@ setEnv: ## Set Env to use SSH in Docker container
 	export COMPOSE_DOCKER_CLI_BUILD=1 export DOCKER_BUILDKIT=1
 
 lint: ## Lint all files
-	golangci-lint run --config=.golangci.yml $(TARGET_FILE)
+	docker compose exec -it app golangci-lint run --config=.golangci.yml $(TARGET_FILE)
 
 dlint: ## Lint difference files
-	golangci-lint run --config=.golangci.yml `$(call diff)`
+	docker compose exec -it app golangci-lint run --config=.golangci.yml `$(call diff)`
 
 test: ## Run go test
 	docker compose exec -it app zsh -c "go test ${TARGET_FILE}"
