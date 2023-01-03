@@ -3,9 +3,9 @@ package rdb
 import (
 	"context"
 
-	"github.com/ryo-funaba/example-serverless-go/internal/pkg/enum"
-	"github.com/ryo-funaba/example-serverless-go/internal/pkg/errorutil"
-	"github.com/ryo-funaba/example-serverless-go/internal/pkg/logutil"
+	"github.com/ryo-funaba/example_echo/internal/pkg/enum"
+	"github.com/ryo-funaba/example_echo/internal/pkg/errorutil"
+	"github.com/ryo-funaba/example_echo/internal/pkg/logutil"
 )
 
 const transactionStructName = "Transaction"

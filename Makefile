@@ -16,7 +16,7 @@ build: setEnv ## Build docker container
 
 build-go: clean ## Build go file
 	docker compose exec -it app \
-	env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -trimpath -o bin/main cmd/main.go
+	env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -trimpath -o bin/app cmd/main.go
 
 clean: ## remove binary files and cached files
 	docker compose exec -it app go clean && rm -rf ./bin

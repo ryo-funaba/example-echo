@@ -1,4 +1,4 @@
-module github.com/ryo-funaba/example-serverless-go
+module github.com/ryo-funaba/example_echo
 
 go 1.19
 
