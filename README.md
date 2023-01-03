@@ -1,13 +1,13 @@
 # example_echo
 
-このリポジトリは Go を使用した Serverless Framework のサンプルコードリポジトリです。
+このリポジトリは Go の Web フレームワークである echo のサンプルコードリポジトリです。
 
 ## ⚙️技術スタック
 
 - 言語
   - Go@1.19.0
 - フレームワーク
-  - Serverless Framework@3.22.0
+  - echo@4.10.0
 - パッケージ管理
   - Go Modules
 - アーキテクチャ
@@ -20,7 +20,7 @@
   - ローカル環境
     - Docker Compose
   - 本番環境
-    - Lambda
+    - ECS
 
 ## 🔨環境構築
 
@@ -40,19 +40,13 @@
    cd example_echo
    ```
 
-3. Docker image を作成
+3. API サーバーを起動
 
    ```bash
-   make build
+   make setup
    ```
 
-4. Docker Compose を起動
-
-   ```bash
-   make up
-   ```
-
-5. 以上
+4. 以上
 
 ## 🔍動作確認
 
@@ -84,7 +78,11 @@
 $ make help
 
 help                 Show options
+setup                Create a container and start a local server
 build                Build docker container
+build-go             Build go file
+clean                Remove binary files and cached files
+tidy                 Run go mod tidy
 up                   Do docker compose up in detached mode
 down                 Do docker compose down
 restart              Do docker compose restart
@@ -94,4 +92,5 @@ ps                   Check container status
 setEnv               Set Env to use SSH in Docker container
 lint                 Lint all files
 dlint                Lint difference files
+test                 Run go test
 ```

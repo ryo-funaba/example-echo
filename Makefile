@@ -18,7 +18,7 @@ build-go: clean ## Build go file
 	docker compose exec -it app \
 	env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -trimpath -o bin/app cmd/main.go
 
-clean: ## remove binary files and cached files
+clean: ## Remove binary files and cached files
 	docker compose exec -it app go clean && rm -rf ./bin
 
 tidy: ## Run go mod tidy
