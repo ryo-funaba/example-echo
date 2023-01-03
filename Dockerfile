@@ -8,12 +8,11 @@ FROM golang:1.19.0-alpine3.16 AS builder
 #パッケージをインストール
 RUN apk update && \
     apk --no-cache add \
-    curl=7.83.1-r4 \
+    curl=7.83.1-r5 \
     gcc=11.2.1_git20220219-r2 \
     git=2.36.3-r0 \
     make=4.3-r0 \
     musl-dev=1.2.3-r2 \
-    npm=8.10.0-r0 \
     openssh=9.0_p1-r2 \
     tzdata=2022f-r1 \
     vim=8.2.5000-r0 \
@@ -22,8 +21,6 @@ RUN apk update && \
 # タイムゾーンの設定
 RUN cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
-# Serverless Frameworkをインストール
-RUN npm install -g serverless@3.22.0
 
 # 非rootユーザーを作成
 ENV USER tempUser
@@ -56,12 +53,11 @@ RUN mkdir -m 700 ~/.ssh && \
 
 # モジュールをインストール
 COPY --chown=$USER:$USER go.mod .
-RUN go mod download && \
-    rm -rf go.mod
+RUN go mod download
 
 # goファイルをビルド
 COPY --chown=$USER:$USER . .
-RUN GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -trimpath -o bin cmd/main.go
+RUN GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -trimpath -o bin/app cmd/main.go
 
 ##
 ## Deploy
