@@ -1,4 +1,4 @@
-.PHONY: help setup build build-go clean tidy up down restart exec logs ps setEnv lint dlint test
+.PHONY: help setup start build build-go clean tidy up down restart exec logs ps setEnv lint dlint test
 
 BASE_BRANCH="main"
 GO_VERSION=1.19.0
@@ -9,7 +9,10 @@ help: ## Show options
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 setup: ## Create a container and start a local server
-	make build && make up
+	make build && make up && make start
+
+start: ## Start a local server
+	docker compose exec -it app go run cmd/main.go
 
 build: setEnv ## Build docker container
 	docker compose build --ssh default
