@@ -10,6 +10,8 @@ services:
     env_file:
       - Docker/local.env
     hostname: example_serverless_go
+    ports:
+      - 3000:3000
     tty: true
     volumes:
       - .:/home/tempUser/example_serverless_go
@@ -17,7 +19,7 @@ services:
 
   db:
     image: genschsa/mysql-employees
-    container_name: mysql-employees
+    container_name: employees
     environment:
       MYSQL_ROOT_PASSWORD: college
     platform: linux/x86_64

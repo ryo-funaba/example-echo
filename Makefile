@@ -1,4 +1,4 @@
-.PHONY: help build up down restart exec logs ps setEnv lint dlint test
+.PHONY: help setup build build-go clean tidy up down restart exec logs ps setEnv lint dlint test
 
 BASE_BRANCH="main"
 GO_VERSION=1.19.0
@@ -8,8 +8,21 @@ help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
+setup: ## Create a container and start a local server
+	make build && make up
+
 build: setEnv ## Build docker container
 	docker compose build --ssh default
+
+build-go: clean ## Build go file
+	docker compose exec -it app \
+	env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -trimpath -o bin/main cmd/main.go
+
+clean: ## remove binary files and cached files
+	docker compose exec -it app go clean && rm -rf ./bin
+
+tidy: ## Run go mod tidy
+	docker compose exec -it app go mod tidy
 
 up: ## Do docker compose up in detached mode
 	docker compose up -d

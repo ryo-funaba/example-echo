@@ -31,7 +31,11 @@
     "unparam",
     "varcheck"
   ],
+  "explorer.compactFolders": false,
   "files.autoSave": "onFocusChange",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
   "go.formatTool": "goimports",
   "go.lintTool": "golangci-lint",
   "go.lintFlags": [
