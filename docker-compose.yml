@@ -1,21 +1,21 @@
 version: "3.9"
 services:
   app:
-    image: example_serverless_go
+    image: example_echo
     build:
       context: .
       dockerfile: Dockerfile
       target: builder
-    container_name: example_serverless_go
+    container_name: example_echo
     env_file:
       - Docker/local.env
-    hostname: example_serverless_go
+    hostname: example_echo
     ports:
       - 3000:3000
     tty: true
     volumes:
-      - .:/home/tempUser/example_serverless_go
-    working_dir: /home/tempUser/example_serverless_go
+      - .:/home/tempUser/example_echo
+    working_dir: /home/tempUser/example_echo
 
   db:
     image: genschsa/mysql-employees

@@ -1,4 +1,4 @@
-# example-serverless-go
+# example_echo
 
 このリポジトリは Go を使用した Serverless Framework のサンプルコードリポジトリです。
 
@@ -31,13 +31,13 @@
 1. リポジトリをクローン
 
    ```bash
-   git clone github:ryo-funaba/example-serverless-go.git
+   git clone github:ryo-funaba/example_echo.git
    ```
 
 2. トップディレクトリに移動
 
    ```bash
-   cd example-serverless-go
+   cd example_echo
    ```
 
 3. Docker image を作成
