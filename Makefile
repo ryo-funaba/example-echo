@@ -12,7 +12,7 @@ setup: ## Create a container and start a local server
 	make build && make up && make start
 
 start: ## Start a local server
-	docker compose exec -it app go run cmd/main.go
+	docker compose exec -it app air
 
 build: setEnv ## Build docker container
 	docker compose build --ssh default
