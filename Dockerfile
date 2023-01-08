@@ -47,6 +47,10 @@ RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosu
 RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.50.1 && \
 curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
 
+# sqlboilerをインストール
+RUN go install github.com/volatiletech/sqlboiler/v4@latest && \
+go install github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-mysql@latest
+
 # GitHubにSSH接続するための設定
 RUN mkdir -m 700 ~/.ssh && \
     ssh-keyscan github.com > ~/.ssh/known_hosts && \
