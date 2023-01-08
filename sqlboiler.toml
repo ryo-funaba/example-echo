@@ -1,0 +1,12 @@
+pkgname = "boiler"
+output = "internal/pkg/boiler"
+add-enum-types = true
+wipe = true
+
+[mysql]
+  dbname     = "employees"
+  host       = "db"
+  port       = 3306
+  user       = "root"
+  pass       = "college"
+  sslmode    = "false"
