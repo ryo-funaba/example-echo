@@ -79,6 +79,7 @@ $ make help
 
 help                 Show options
 setup                Create a container and start a local server
+start                Start a local server
 build                Build docker container
 build-go             Build go file
 clean                Remove binary files and cached files
@@ -87,6 +88,7 @@ up                   Do docker compose up in detached mode
 down                 Do docker compose down
 restart              Do docker compose restart
 exec                 Execute a command in a running app container
+boil                 Run SQLBoiler to generate a Go ORM
 logs                 Tail docker compose logs
 ps                   Check container status
 setEnv               Set Env to use SSH in Docker container

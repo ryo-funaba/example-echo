@@ -11,3 +11,4 @@ tmp
 docker-compose.yml
 Makefile
 README.md
+sqlboiler.toml

@@ -1,4 +1,4 @@
-.PHONY: help setup start build build-go clean tidy up down restart exec logs ps setEnv lint dlint test
+.PHONY: help setup start build build-go clean tidy up down restart exec boil logs ps setEnv lint dlint test
 
 BASE_BRANCH="main"
 GO_VERSION=1.19.0
@@ -37,6 +37,9 @@ restart: down up ## Do docker compose restart
 
 exec: up ## Execute a command in a running app container
 	docker compose exec -it app zsh
+
+boil: ## Run SQLBoiler to generate a Go ORM
+	docker compose exec -it app sqlboiler mysql -c sqlboiler.toml
 
 logs: ## Tail docker compose logs
 	docker compose logs -f
