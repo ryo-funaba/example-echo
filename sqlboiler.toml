@@ -1,6 +1,7 @@
 pkgname = "boiler"
 output = "internal/pkg/boiler"
 add-enum-types = true
+no-tests = true
 wipe = true
 
 [mysql]
