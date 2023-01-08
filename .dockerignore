@@ -2,6 +2,8 @@
 .vscode
 bin
 Docker
+tmp
+.air.toml
 .DS_Store
 .git
 .gitignore
