@@ -3,7 +3,7 @@ package s3
 import (
 	"testing"
 
-	"github.com/ryo-funaba/example_echo/internal/pkg/errorutil"
+	"github.com/ryo-funaba/example_echo/internal/utils/errorutil"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/s3"

@@ -4,8 +4,8 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/ryo-funaba/example_echo/internal/pkg/enum"
-	"github.com/ryo-funaba/example_echo/internal/pkg/errorutil"
+	"github.com/ryo-funaba/example_echo/internal/utils/enum"
+	"github.com/ryo-funaba/example_echo/internal/utils/errorutil"
 	"github.com/volatiletech/sqlboiler/v4/boil"
 )
 

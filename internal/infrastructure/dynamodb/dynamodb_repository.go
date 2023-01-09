@@ -5,8 +5,8 @@ import (
 
 	dynamoDB "github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
-	"github.com/ryo-funaba/example_echo/internal/pkg/errorutil"
-	"github.com/ryo-funaba/example_echo/internal/pkg/logutil"
+	"github.com/ryo-funaba/example_echo/internal/utils/errorutil"
+	"github.com/ryo-funaba/example_echo/internal/utils/logutil"
 )
 
 const dynamodbRepositoryStructName = "dynamodbRepository"
