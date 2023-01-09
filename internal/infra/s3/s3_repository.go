@@ -3,6 +3,7 @@ package s3
 import (
 	"fmt"
 
+	"github.com/ryo-funaba/example_echo/internal/domain/repository"
 	"github.com/ryo-funaba/example_echo/internal/utils/errorutil"
 	"github.com/ryo-funaba/example_echo/internal/utils/logutil"
 
@@ -16,14 +17,7 @@ type s3Repository struct {
 	svc s3iface.S3API
 }
 
-type S3Repository interface {
-	GetObject(input s3.GetObjectInput) (*s3.GetObjectOutput, error)
-	PutObject(input s3.PutObjectInput) (*s3.PutObjectOutput, error)
-	DeleteObject(input s3.DeleteObjectInput) (*s3.DeleteObjectOutput, error)
-	CopyObject(input s3.CopyObjectInput) (*s3.CopyObjectOutput, error)
-}
-
-func NewS3Repository(svc s3iface.S3API) S3Repository {
+func NewS3Repository(svc s3iface.S3API) repository.S3Repository {
 	return &s3Repository{svc: svc}
 }
 

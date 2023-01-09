@@ -5,6 +5,7 @@ import (
 
 	dynamoDB "github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
+	"github.com/ryo-funaba/example_echo/internal/domain/repository"
 	"github.com/ryo-funaba/example_echo/internal/utils/errorutil"
 	"github.com/ryo-funaba/example_echo/internal/utils/logutil"
 )
@@ -15,12 +16,7 @@ type dynamodbRepository struct {
 	svc dynamodbiface.DynamoDBAPI
 }
 
-type DynamodbRepository interface {
-	GetItem(input dynamoDB.GetItemInput) (*dynamoDB.GetItemOutput, error)
-	PutItem(input dynamoDB.PutItemInput) (*dynamoDB.PutItemOutput, error)
-}
-
-func NewDynamodbRepository(svc dynamodbiface.DynamoDBAPI) DynamodbRepository {
+func NewDynamodbRepository(svc dynamodbiface.DynamoDBAPI) repository.DynamodbRepository {
 	return &dynamodbRepository{svc: svc}
 }
 

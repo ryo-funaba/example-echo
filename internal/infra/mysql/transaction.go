@@ -3,6 +3,7 @@ package mysql
 import (
 	"context"
 
+	"github.com/ryo-funaba/example_echo/internal/domain/repository"
 	"github.com/ryo-funaba/example_echo/internal/utils/enum"
 	"github.com/ryo-funaba/example_echo/internal/utils/errorutil"
 	"github.com/ryo-funaba/example_echo/internal/utils/logutil"
@@ -11,18 +12,10 @@ import (
 const transactionStructName = "Transaction"
 
 type transaction struct {
-	rdb Cluster
+	rdb repository.Cluster
 }
 
-type Transaction interface {
-	ExecTx(
-		ctx context.Context,
-		f func(ctx context.Context) error,
-		database string,
-	) error
-}
-
-func NewTransaction(isDebugMode bool) Transaction {
+func NewTransaction(isDebugMode bool) repository.Transaction {
 	c := NewCluster(isDebugMode)
 
 	return &transaction{c}
