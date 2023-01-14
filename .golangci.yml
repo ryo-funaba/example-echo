@@ -63,6 +63,9 @@ issues:
       text: "exported:"
     - linters:
         - revive
+      text: "unexported-return:"
+    - linters:
+        - revive
       text: "package-comments: should have a package comment"
     - linters:
         - stylecheck

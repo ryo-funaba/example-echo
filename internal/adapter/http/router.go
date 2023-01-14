@@ -11,7 +11,8 @@ import (
 )
 
 const (
-	apiVersion      = "/v1"
+	apiVersion = "/v1"
+	// ヘルスチェック系
 	healthCheckRoot = "/health_check"
 	// employee系
 	employeeAPIRoot        = apiVersion + "/employee"
