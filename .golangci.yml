@@ -67,22 +67,25 @@ issues:
     - linters:
         - stylecheck
       text: "ST1000:"
-    - path: pkg/errorutil/error.go
+    - path: internal/utils/errorutil/error.go
       text: "mnd:"
       linters:
         - gomnd
-    - path: internal/infrastructure/s3/mock_s3_repository.go
+    - path: internal/infra/s3/mock_s3_repository.go
       text: "var-naming:"
       linters:
         - revive
-    - path: internal/infrastructure/s3/mock_s3_repository.go
+    - path: internal/infra/s3/mock_s3_repository.go
       text: "ST1003:"
       linters:
         - stylecheck
-    - path: internal/infrastructure/dynamodb/dynamodb_repository_test.go
+    - path: internal/infra/dynamodb/dynamodb_repository_test.go
       text: "ST1019"
       linters:
         - stylecheck
+    - path: _handler\.go
+      linters:
+        - revive
     - path: _test\.go
       linters:
         - dupl
