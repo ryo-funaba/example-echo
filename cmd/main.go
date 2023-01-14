@@ -1,26 +1,38 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
+	"strconv"
+	"time"
 
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	adaptorHTTP "github.com/ryo-funaba/example_echo/internal/adapter/http"
 )
 
 func main() {
-	e := echo.New()
+	router := adaptorHTTP.InitRouter()
+	addr := os.Getenv("HTTP_PORT")
 
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
+	rTimeout, err := strconv.Atoi(os.Getenv("HTTP_ReadTimeout"))
+	if err != nil {
+		panic(err)
+	}
 
-	e.GET("/", hello)
+	wTimeout, err := strconv.Atoi(os.Getenv("HTTP_WriteTimeout"))
+	if err != nil {
+		panic(err)
+	}
 
-	p := os.Getenv("HTTP_PORT")
+	srv := &http.Server{
+		Addr:         ":" + addr,
+		Handler:      router,
+		ReadTimeout:  time.Duration(rTimeout) * time.Second,
+		WriteTimeout: time.Duration(wTimeout) * time.Second,
+	}
 
-	e.Logger.Fatal(e.Start(":" + p))
-}
-
-func hello(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World!")
+	err = srv.ListenAndServe()
+	if err != nil {
+		log.Fatalf("Failed to listen and serve: %+v", err)
+	}
 }
