@@ -3,35 +3,27 @@ package main
 import (
 	"log"
 	"net/http"
-	"os"
-	"strconv"
-	"time"
 
 	adaptorHTTP "github.com/ryo-funaba/example_echo/internal/adapter/http"
+	"github.com/ryo-funaba/example_echo/internal/config"
 )
 
 func main() {
 	router := adaptorHTTP.InitRouter()
-	addr := os.Getenv("HTTP_PORT")
 
-	rTimeout, err := strconv.Atoi(os.Getenv("HTTP_ReadTimeout"))
+	conf, err := config.LoadConfig()
 	if err != nil {
 		panic(err)
 	}
 
-	wTimeout, err := strconv.Atoi(os.Getenv("HTTP_WriteTimeout"))
-	if err != nil {
-		panic(err)
-	}
-
-	srv := &http.Server{
-		Addr:         ":" + addr,
+	s := &http.Server{
+		Addr:         conf.HTTPInfo.Addr,
 		Handler:      router,
-		ReadTimeout:  time.Duration(rTimeout) * time.Second,
-		WriteTimeout: time.Duration(wTimeout) * time.Second,
+		ReadTimeout:  conf.HTTPInfo.ReadTimeout,
+		WriteTimeout: conf.HTTPInfo.WriteTimeout,
 	}
 
-	err = srv.ListenAndServe()
+	err = s.ListenAndServe()
 	if err != nil {
 		log.Fatalf("Failed to listen and serve: %+v", err)
 	}
