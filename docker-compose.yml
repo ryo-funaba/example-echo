@@ -18,13 +18,17 @@ services:
     working_dir: /home/tempUser/example_echo
 
   db:
-    image: genschsa/mysql-employees
-    container_name: employees
+    image: mysql:8.0.27
+    container_name: twitter_db
     environment:
-      MYSQL_ROOT_PASSWORD: college
+      MYSQL_ROOT_PASSWORD: mysql
+      MYSQL_DATABASE: twitter
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      TZ: 'Asia/Tokyo'
     platform: linux/x86_64
     ports:
-      - 127.0.0.1:3306:3306
+      - 3306:3306
     restart: always
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
