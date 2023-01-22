@@ -89,6 +89,9 @@ down                 Do docker compose down
 restart              Do docker compose restart
 exec                 Execute a command in a running app container
 boil                 Run SQLBoiler to generate a Go ORM
+migrate-create       Create a set of timestamped up/down migrations titled $(f)
+migrate-up           Apply $(n) up migrations
+migrate-down         Apply $(n) down migrations
 logs                 Tail docker compose logs
 ps                   Check container status
 setEnv               Set Env to use SSH in Docker container

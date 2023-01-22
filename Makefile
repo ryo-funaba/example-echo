@@ -1,4 +1,6 @@
-.PHONY: help setup start build build-go clean tidy up down restart exec boil logs ps setEnv lint dlint test
+.PHONY: help setup start build build-go clean tidy up down restart exec boil migrate-create migrate-up migrate-down logs ps setEnv lint dlint test
+
+include Docker/local.env
 
 BASE_BRANCH="main"
 GO_VERSION=1.19.0
@@ -40,6 +42,15 @@ exec: up ## Execute a command in a running app container
 
 boil: ## Run SQLBoiler to generate a Go ORM
 	docker compose exec -it app sqlboiler mysql -c sqlboiler.toml
+
+migrate-create: ## Create a set of timestamped up/down migrations titled $(f)
+	docker compose exec -it app migrate create -ext sql -dir db/migrations -seq $(f)
+
+migrate-up: ## Apply $(n) up migrations
+	docker compose exec -it app migrate -database "$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ up $(n)
+
+migrate-down: ## Apply $(n) down migrations
+	docker compose exec -it app migrate -database="$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ down $(n)
 
 logs: ## Tail docker compose logs
 	docker compose logs -f
