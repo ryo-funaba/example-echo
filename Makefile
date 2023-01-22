@@ -1,4 +1,4 @@
-.PHONY: help setup start build build-go clean tidy up down restart exec boil migrate-create migrate-up migrate-down logs ps setEnv lint dlint test
+.PHONY: help setup build up down restart logs ps setEnv exec build-go clean tidy start boil migrate-create migrate-up migrate-up-n migrate-down migrate-down-n lint dlint test
 
 include local.env
 
@@ -10,14 +10,31 @@ help: ## Show options
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
-setup: ## Create a container and start a local server
-	make build && make up && make start
-
-start: ## Start a local server
-	docker compose exec -it app air
+setup: ## Create a container and migrate db and start a local server
+	make build && make up && make migrate-down && make migrate-up && make start
 
 build: setEnv ## Build docker container
 	docker compose build --ssh default
+
+up: ## Do docker compose up in detached mode
+	docker compose up -d
+
+down: ## Do docker compose down
+	docker compose down
+
+restart: down up ## Do docker compose restart
+
+logs: ## Tail docker compose logs
+	docker compose logs -f
+
+ps: ## Check container status
+	docker compose ps
+
+setEnv: ## Set Env to use SSH in Docker container
+	export COMPOSE_DOCKER_CLI_BUILD=1 export DOCKER_BUILDKIT=1
+
+exec: up ## Execute a command in a running app container
+	docker compose exec -it app zsh
 
 build-go: clean ## Build go file
 	docker compose exec -it app \
@@ -29,16 +46,8 @@ clean: ## Remove binary files and cached files
 tidy: ## Run go mod tidy
 	docker compose exec -it app go mod tidy
 
-up: ## Do docker compose up in detached mode
-	docker compose up -d
-
-down: ## Do docker compose down
-	docker compose down
-
-restart: down up ## Do docker compose restart
-
-exec: up ## Execute a command in a running app container
-	docker compose exec -it app zsh
+start: ## Start a local server
+	docker compose exec -it app air
 
 boil: ## Run SQLBoiler to generate a Go ORM
 	docker compose exec -it app sqlboiler mysql -c sqlboiler.toml
@@ -46,20 +55,17 @@ boil: ## Run SQLBoiler to generate a Go ORM
 migrate-create: ## Create a set of timestamped up/down migrations titled $(f)
 	docker compose exec -it app migrate create -ext sql -dir db/migrations -seq $(f)
 
-migrate-up: ## Apply $(n) up migrations
+migrate-up: ## Apply all up migrations
+	docker compose exec -it app migrate -database "$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ up
+
+migrate-up-n: ## Apply $(n) up migrations
 	docker compose exec -it app migrate -database "$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ up $(n)
 
-migrate-down: ## Apply $(n) down migrations
+migrate-down: ## Apply all down migrations
+	docker compose exec -it app migrate -database="$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ down -all
+
+migrate-down-n: ## Apply $(n) down migrations
 	docker compose exec -it app migrate -database="$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ down $(n)
-
-logs: ## Tail docker compose logs
-	docker compose logs -f
-
-ps: ## Check container status
-	docker compose ps
-
-setEnv: ## Set Env to use SSH in Docker container
-	export COMPOSE_DOCKER_CLI_BUILD=1 export DOCKER_BUILDKIT=1
 
 lint: ## Lint all files
 	docker compose exec -it app golangci-lint run --config=.golangci.yml $(TARGET_FILE)
