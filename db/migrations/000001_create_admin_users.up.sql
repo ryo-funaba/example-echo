@@ -9,6 +9,6 @@ CREATE TABLE IF NOT EXISTS `admin_users` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新日時',
   `deleted_at` datetime NULL COMMENT '削除日時',
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `idx_admin_users_username` (`username`)
+  UNIQUE INDEX `idx_admin_users_username` (`username`),
   UNIQUE INDEX `idx_admin_users_email` (`email`)
 ) DEFAULT CHARACTER SET utf8mb4 COMMENT="管理ユーザー";
