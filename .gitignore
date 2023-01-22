@@ -18,4 +18,4 @@ bin/
 vendor/
 
 # mysql data in container
-Docker/mysql/data/
+db/mysql/data/
