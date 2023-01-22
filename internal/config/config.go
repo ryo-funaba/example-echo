@@ -49,12 +49,22 @@ func createHTTPInfo() (*httpInfo, error) {
 		return nil, errorutil.Errorf(errorutil.Unknown, "env of HTTP_PORT is empty")
 	}
 
-	rTimeout, err := strconv.Atoi(os.Getenv("HTTP_ReadTimeout"))
+	r, b := os.LookupEnv("HTTP_ReadTimeout")
+	if !b {
+		return nil, errorutil.Errorf(errorutil.Unknown, "env of HTTP_ReadTimeout is empty")
+	}
+
+	rTimeout, err := strconv.Atoi(r)
 	if err != nil {
 		return nil, errorutil.Errorf(errorutil.Unknown, err.Error())
 	}
 
-	wTimeout, err := strconv.Atoi(os.Getenv("HTTP_WriteTimeout"))
+	w, b := os.LookupEnv("HTTP_WriteTimeout")
+	if !b {
+		return nil, errorutil.Errorf(errorutil.Unknown, "env of HTTP_WriteTimeout is empty")
+	}
+
+	wTimeout, err := strconv.Atoi(w)
 	if err != nil {
 		return nil, errorutil.Errorf(errorutil.Unknown, err.Error())
 	}
@@ -77,9 +87,14 @@ func createMySQLInfo() (*mysqlInfo, error) {
 		return nil, errorutil.Errorf(errorutil.Unknown, "env of MYSQL_PASSWORD is empty")
 	}
 
-	addr, b := os.LookupEnv("MYSQL_ADDR")
+	host, b := os.LookupEnv("MYSQL_HOST")
 	if !b {
-		return nil, errorutil.Errorf(errorutil.Unknown, "env of MYSQL_ADDR is empty")
+		return nil, errorutil.Errorf(errorutil.Unknown, "env of MYSQL_HOST is empty")
+	}
+
+	port, b := os.LookupEnv("MYSQL_PORT")
+	if !b {
+		return nil, errorutil.Errorf(errorutil.Unknown, "env of MYSQL_PORT is empty")
 	}
 
 	dbName, b := os.LookupEnv("MYSQL_DATABASE")
@@ -90,7 +105,7 @@ func createMySQLInfo() (*mysqlInfo, error) {
 	return &mysqlInfo{
 		User:     user,
 		PassWord: password,
-		Addr:     addr,
+		Addr:     host + ":" + port,
 		DBName:   dbName,
 	}, nil
 }
