@@ -19,3 +19,6 @@ vendor/
 
 # mysql data in container
 db/mysql/data/
+
+# temp folder
+tmp/
