@@ -78,23 +78,25 @@
 $ make help
 
 help                 Show options
-setup                Create a container and start a local server
-start                Start a local server
+setup                Create a container and migrate db and start a local server
 build                Build docker container
-build-go             Build go file
-clean                Remove binary files and cached files
-tidy                 Run go mod tidy
 up                   Do docker compose up in detached mode
 down                 Do docker compose down
 restart              Do docker compose restart
-exec                 Execute a command in a running app container
-boil                 Run SQLBoiler to generate a Go ORM
-migrate-create       Create a set of timestamped up/down migrations titled $(f)
-migrate-up           Apply $(n) up migrations
-migrate-down         Apply $(n) down migrations
 logs                 Tail docker compose logs
 ps                   Check container status
 setEnv               Set Env to use SSH in Docker container
+exec                 Execute a command in a running app container
+build-go             Build go file
+clean                Remove binary files and cached files
+tidy                 Run go mod tidy
+start                Start a local server
+boil                 Run SQLBoiler to generate a Go ORM
+migrate-create       Create a set of timestamped up/down migrations titled $(f)
+migrate-up           Apply all up migrations
+migrate-up-n         Apply $(n) up migrations
+migrate-down         Apply all down migrations
+migrate-down-n       Apply $(n) down migrations
 lint                 Lint all files
 dlint                Lint difference files
 test                 Run go test
