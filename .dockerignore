@@ -1,7 +1,6 @@
 .github
 .vscode
 bin
-Docker
 tmp
 .air.toml
 .DS_Store

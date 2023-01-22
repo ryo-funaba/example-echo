@@ -1,6 +1,6 @@
 .PHONY: help setup start build build-go clean tidy up down restart exec boil migrate-create migrate-up migrate-down logs ps setEnv lint dlint test
 
-include Docker/local.env
+include local.env
 
 BASE_BRANCH="main"
 GO_VERSION=1.19.0
