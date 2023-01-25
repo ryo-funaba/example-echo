@@ -4,13 +4,4 @@
 package model
 
 var ViewNames = struct {
-	CurrentDeptEmp    string
-	DeptEmpLatestDate string
-	VFullDepartments  string
-	VFullEmployees    string
-}{
-	CurrentDeptEmp:    "current_dept_emp",
-	DeptEmpLatestDate: "dept_emp_latest_date",
-	VFullDepartments:  "v_full_departments",
-	VFullEmployees:    "v_full_employees",
-}
+}{}
