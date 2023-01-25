@@ -5,9 +5,10 @@ no-tests = true
 wipe = true
 
 [mysql]
-  dbname     = "employees"
+  dbname     = "twitter"
   host       = "db"
   port       = 3306
-  user       = "root"
-  pass       = "college"
+  user       = "user"
+  pass       = "password"
   sslmode    = "false"
+  blacklist = ["schema_migrations"]

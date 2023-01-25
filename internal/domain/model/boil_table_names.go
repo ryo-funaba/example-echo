@@ -4,17 +4,11 @@
 package model
 
 var TableNames = struct {
-	Departments string
-	DeptEmp     string
-	DeptManager string
-	Employees   string
-	Salaries    string
-	Titles      string
+	AdminUsers string
+	UserTypes  string
+	Users      string
 }{
-	Departments: "departments",
-	DeptEmp:     "dept_emp",
-	DeptManager: "dept_manager",
-	Employees:   "employees",
-	Salaries:    "salaries",
-	Titles:      "titles",
+	AdminUsers: "admin_users",
+	UserTypes:  "user_types",
+	Users:      "users",
 }

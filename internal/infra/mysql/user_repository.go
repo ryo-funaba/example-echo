@@ -10,18 +10,18 @@ import (
 	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )
 
-type employeeRepository struct{}
+type userRepository struct{}
 
-func NewEmployeeRepository() repository.EmployeeRepository {
-	return &employeeRepository{}
+func NewUserRepository() repository.UserRepository {
+	return &userRepository{}
 }
 
-func (r *employeeRepository) FindOneByEmpNo(ctx context.Context, conn boil.ContextExecutor, empNo int) (*model.Employee, error) {
+func (r *userRepository) FindOneByID(ctx context.Context, conn boil.ContextExecutor, id uint) (*model.User, error) {
 	q := []qm.QueryMod{
-		model.EmployeeWhere.EmpNo.EQ(empNo),
+		model.UserWhere.ID.EQ(id),
 	}
 
-	row, err := model.Employees(q...).One(ctx, conn)
+	row, err := model.Users(q...).One(ctx, conn)
 	if err != nil {
 		return nil, errorutil.Errorf(errorutil.Unknown, err.Error())
 	}
@@ -29,12 +29,12 @@ func (r *employeeRepository) FindOneByEmpNo(ctx context.Context, conn boil.Conte
 	return row, nil
 }
 
-func (r *employeeRepository) FindAllByFirstName(ctx context.Context, conn boil.ContextExecutor, firstName string) ([]*model.Employee, error) {
+func (r *userRepository) FindAllByName(ctx context.Context, conn boil.ContextExecutor, name string) ([]*model.User, error) {
 	q := []qm.QueryMod{
-		model.EmployeeWhere.FirstName.EQ(firstName),
+		model.UserWhere.Name.EQ(name),
 	}
 
-	rows, err := model.Employees(q...).All(ctx, conn)
+	rows, err := model.Users(q...).All(ctx, conn)
 	if err != nil {
 		return nil, errorutil.Errorf(errorutil.Unknown, err.Error())
 	}

@@ -7,19 +7,17 @@ import (
 	"github.com/ryo-funaba/example_echo/internal/utils/timeutil"
 )
 
-type Employee struct {
-	ID        int    `json:"id"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
-	Age       int    `json:"age"`
+type User struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
+	Age  int    `json:"age"`
 }
 
-func EmployeeFromDomainModel(m *model.Employee) *Employee {
-	return &Employee{
-		ID:        m.EmpNo,
-		FirstName: m.FirstName,
-		LastName:  m.LastName,
-		Age:       calcAge(m.BirthDate),
+func UserFromDomainModel(m *model.User) *User {
+	return &User{
+		ID:   int(m.ID),
+		Name: m.Name,
+		Age:  calcAge(m.CreatedAt),
 	}
 }
 

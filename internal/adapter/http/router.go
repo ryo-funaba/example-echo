@@ -14,10 +14,10 @@ const (
 	apiVersion = "/v1"
 	// ヘルスチェック系
 	healthCheckRoot = "/health_check"
-	// employee系
-	employeeAPIRoot        = apiVersion + "/employee"
-	employeeIDParam        = "employee_id"
-	employeeFirstNameParam = "employee_first_name"
+	// user系
+	userAPIRoot   = apiVersion + "/user"
+	userIDParam   = "user_id"
+	userNameParam = "user_name"
 )
 
 func InitRouter() *echo.Echo {
@@ -34,21 +34,21 @@ func InitRouter() *echo.Echo {
 		healthCheckGroup.GET(path, healthCheck)
 	}
 
-	// employee系
-	employeeRepository := mysql.NewEmployeeRepository()
-	employeeService := service.NewEmployeeService(employeeRepository)
-	employeeUsecase := usecase.NewEmployeeUsecase(employeeService)
-	employeeGroup := e.Group(employeeAPIRoot)
+	// user系
+	userRepository := mysql.NewUserRepository()
+	userService := service.NewUserService(userRepository)
+	userUsecase := usecase.NewUserUsecase(userService)
+	userGroup := e.Group(userAPIRoot)
 	{
-		handler := NewEmployeeHandler(employeeUsecase)
+		handler := NewUserHandler(userUsecase)
 
-		// v1/employee/{employee_id}
-		path := fmt.Sprintf("/:%s", employeeIDParam)
-		employeeGroup.GET(path, handler.FindOneByEmpNo())
+		// v1/user/{user_id}
+		path := fmt.Sprintf("/:%s", userIDParam)
+		userGroup.GET(path, handler.FindOneByID())
 
-		// v1/employee/{employee_first_name}
-		path = fmt.Sprintf("/:%s", employeeFirstNameParam)
-		employeeGroup.GET(path, handler.FindAllByFirstName())
+		// v1/user/{user_name}
+		path = fmt.Sprintf("/:%s", userNameParam)
+		userGroup.GET(path, handler.FindAllByName())
 	}
 
 	return e
