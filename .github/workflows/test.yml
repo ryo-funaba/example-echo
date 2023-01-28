@@ -10,7 +10,9 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-go@v3
         with:
-          go-version-file: 'go.mod'
+          go-version-file: "go.mod"
           cache: true
+      - name: build
+        run: go build ./...
       - name: test
         run: go test ./...
