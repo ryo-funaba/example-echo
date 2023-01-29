@@ -1,4 +1,4 @@
-.PHONY: help setup build up down restart logs ps setEnv exec build-go clean tidy start boil migrate-create migrate-up migrate-up-n migrate-down migrate-down-n lint dlint test
+.PHONY: help setup build up down restart logs ps setEnv exec build-go clean tidy start boil migrate-create migrate-up migrate-up-n migrate-down migrate-down-n lint dlint lint-docker test
 
 include local.env
 
@@ -72,6 +72,9 @@ lint: ## Lint all files
 
 dlint: ## Lint difference files
 	docker compose exec -it app golangci-lint run --config=.golangci.yml `$(call diff)`
+
+lint-docker: ## Lint dockerfile
+	docker run --rm -i hadolint/hadolint hadolint - --ignore DL4006 < Dockerfile
 
 test: ## Run go test
 	docker compose exec -it app zsh -c "go test ${TARGET_FILE}"
