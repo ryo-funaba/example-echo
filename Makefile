@@ -52,20 +52,20 @@ start: ## Start a local server
 boil: ## Run SQLBoiler to generate a Go ORM
 	docker compose exec -it app sqlboiler mysql -c sqlboiler.toml
 
-migrate-create: ## Create a set of timestamped up/down migrations titled $(f)
+migrate-create: ## Create a set of up/down migrations titled $(f)
 	docker compose exec -it app migrate create -ext sql -dir db/migrations -seq $(f)
 
-migrate-up: ## Apply all up migrations
-	docker compose exec -it app migrate -database "$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ up
+migrate-up: ## Apply all up migrations and run `make boil`
+	docker compose exec -it app migrate -database "$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ up && make boil
 
-migrate-up-n: ## Apply $(n) up migrations
-	docker compose exec -it app migrate -database "$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ up $(n)
+migrate-up-n: ## Apply $(n) up migrations and run `make boil`
+	docker compose exec -it app migrate -database "$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ up $(n) && make boil
 
 migrate-down: ## Apply all down migrations
 	docker compose exec -it app migrate -database="$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ down -all
 
-migrate-down-n: ## Apply $(n) down migrations
-	docker compose exec -it app migrate -database="$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ down $(n)
+migrate-down-n: ## Apply $(n) down migrations and run `make boil`
+	docker compose exec -it app migrate -database="$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ down $(n) && make boil
 
 lint: ## Lint all files
 	docker compose exec -it app golangci-lint run --config=.golangci.yml $(TARGET_FILE)
