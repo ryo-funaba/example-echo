@@ -1,6 +1,7 @@
 name: lint
 on: [pull_request]
 jobs:
+  timeout-minutes: 3
   lint:
     name: lint
     runs-on: ubuntu-latest

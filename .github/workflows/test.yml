@@ -1,6 +1,7 @@
 name: test
 on: [pull_request]
 jobs:
+  timeout-minutes: 3
   test:
     name: test
     runs-on: ubuntu-latest

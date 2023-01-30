@@ -4,6 +4,7 @@ on:
     paths:
       - Dockerfile
 jobs:
+  timeout-minutes: 3
   hadolint:
     name: hadolint
     runs-on: ubuntu-latest
