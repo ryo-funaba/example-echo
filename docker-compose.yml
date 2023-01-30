@@ -5,8 +5,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: builder
+      target: developer
     container_name: example_echo
+    depends_on:
+      - db
     env_file:
       - local.env
     hostname: example_echo
@@ -14,8 +16,8 @@ services:
       - 3000:3000
     tty: true
     volumes:
-      - .:/home/tempUser/example_echo
-    working_dir: /home/tempUser/example_echo
+      - .:/app/example_echo
+    working_dir: /app/example_echo
 
   db:
     image: mysql:8.0.27
