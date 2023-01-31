@@ -35,6 +35,8 @@ type User struct { // 識別番号
 	Email string `boil:"email" json:"email" toml:"email" yaml:"email"`
 	// パスワード
 	Password []byte `boil:"password" json:"password" toml:"password" yaml:"password"`
+	// 生年月日
+	Birthday time.Time `boil:"birthday" json:"birthday" toml:"birthday" yaml:"birthday"`
 	// ユーザータイプID
 	UserTypeID int8 `boil:"user_type_id" json:"user_type_id" toml:"user_type_id" yaml:"user_type_id"`
 	// 登録日時
@@ -55,6 +57,7 @@ var UserColumns = struct {
 	Username   string
 	Email      string
 	Password   string
+	Birthday   string
 	UserTypeID string
 	CreatedAt  string
 	UpdatedAt  string
@@ -66,6 +69,7 @@ var UserColumns = struct {
 	Username:   "username",
 	Email:      "email",
 	Password:   "password",
+	Birthday:   "birthday",
 	UserTypeID: "user_type_id",
 	CreatedAt:  "created_at",
 	UpdatedAt:  "updated_at",
@@ -79,6 +83,7 @@ var UserTableColumns = struct {
 	Username   string
 	Email      string
 	Password   string
+	Birthday   string
 	UserTypeID string
 	CreatedAt  string
 	UpdatedAt  string
@@ -90,6 +95,7 @@ var UserTableColumns = struct {
 	Username:   "users.username",
 	Email:      "users.email",
 	Password:   "users.password",
+	Birthday:   "users.birthday",
 	UserTypeID: "users.user_type_id",
 	CreatedAt:  "users.created_at",
 	UpdatedAt:  "users.updated_at",
@@ -105,6 +111,7 @@ var UserWhere = struct {
 	Username   whereHelperstring
 	Email      whereHelperstring
 	Password   whereHelper__byte
+	Birthday   whereHelpertime_Time
 	UserTypeID whereHelperint8
 	CreatedAt  whereHelpertime_Time
 	UpdatedAt  whereHelpertime_Time
@@ -116,6 +123,7 @@ var UserWhere = struct {
 	Username:   whereHelperstring{field: "`users`.`username`"},
 	Email:      whereHelperstring{field: "`users`.`email`"},
 	Password:   whereHelper__byte{field: "`users`.`password`"},
+	Birthday:   whereHelpertime_Time{field: "`users`.`birthday`"},
 	UserTypeID: whereHelperint8{field: "`users`.`user_type_id`"},
 	CreatedAt:  whereHelpertime_Time{field: "`users`.`created_at`"},
 	UpdatedAt:  whereHelpertime_Time{field: "`users`.`updated_at`"},
@@ -150,8 +158,8 @@ func (r *userR) GetUserType() *UserType {
 type userL struct{}
 
 var (
-	userAllColumns            = []string{"id", "status", "name", "username", "email", "password", "user_type_id", "created_at", "updated_at", "deleted_at"}
-	userColumnsWithoutDefault = []string{"status", "name", "username", "email", "password", "user_type_id", "deleted_at"}
+	userAllColumns            = []string{"id", "status", "name", "username", "email", "password", "birthday", "user_type_id", "created_at", "updated_at", "deleted_at"}
+	userColumnsWithoutDefault = []string{"status", "name", "username", "email", "password", "birthday", "user_type_id", "deleted_at"}
 	userColumnsWithDefault    = []string{"id", "created_at", "updated_at"}
 	userPrimaryKeyColumns     = []string{"id"}
 	userGeneratedColumns      = []string{}
