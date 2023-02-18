@@ -18,11 +18,16 @@ RUN GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -trimpath -o bin/app cmd/m
 ##
 FROM golang:1.19.0-alpine3.16 AS developer
 
+ARG AIR_VERSION=v1.41.0
+ARG GOLANG_CI_LINT_VERSION=v1.51.1
+ARG GOLANG_MIGRATE_VERSION=v4.15.2
+ARG SQLBOILER_VERSION=v4.14.1
+
 RUN apk update && \
     apk --no-cache add \
-    curl=7.83.1-r5 \
+    curl=7.83.1-r6 \
     gcc=11.2.1_git20220219-r2 \
-    git=2.36.3-r0 \
+    git=2.36.5-r0 \
     make=4.3-r0 \
     musl-dev=1.2.3-r2 \
     openssh=9.0_p1-r2 \
@@ -46,13 +51,13 @@ RUN git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosu
     curl -o ~/.zsh/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
 
 # golangci-lint・Airをインストール
-RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "$(go env GOPATH)"/bin v1.50.1 && \
-curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b "$(go env GOPATH)"/bin
+RUN curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "$(go env GOPATH)"/bin ${GOLANG_CI_LINT_VERSION} && \
+curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b "$(go env GOPATH)"/bin ${AIR_VERSION}
 
 # sqlboiler・golang-migrateをインストール
-RUN go install github.com/volatiletech/sqlboiler/v4@latest && \
-go install github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-mysql@latest && \
-go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+RUN go install github.com/volatiletech/sqlboiler/v4@${SQLBOILER_VERSION} && \
+go install github.com/volatiletech/sqlboiler/v4/drivers/sqlboiler-mysql@${SQLBOILER_VERSION} && \
+go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate@${GOLANG_MIGRATE_VERSION}
 
 ##
 ## Deploy
