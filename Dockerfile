@@ -3,7 +3,7 @@
 ##
 ## Builder
 ##
-FROM golang:1.19.0-alpine3.16 AS builder
+FROM golang:1.20.1-alpine3.17 AS builder
 
 WORKDIR /app
 
@@ -16,7 +16,7 @@ RUN GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -trimpath -o bin/app cmd/m
 ##
 ## Developer
 ##
-FROM golang:1.19.0-alpine3.16 AS developer
+FROM golang:1.20.1-alpine3.17 AS developer
 
 ARG AIR_VERSION=v1.41.0
 ARG GOLANG_CI_LINT_VERSION=v1.51.1
@@ -25,15 +25,15 @@ ARG SQLBOILER_VERSION=v4.14.1
 
 RUN apk update && \
     apk --no-cache add \
-    curl=7.83.1-r6 \
-    gcc=11.2.1_git20220219-r2 \
-    git=2.36.5-r0 \
-    make=4.3-r0 \
-    musl-dev=1.2.3-r2 \
-    openssh=9.0_p1-r2 \
+    curl=7.88.1-r0 \
+    gcc=12.2.1_git20220924-r4 \
+    git=2.38.4-r1 \
+    make=4.3-r1 \
+    musl-dev=1.2.3-r4 \
+    openssh=9.1_p1-r2 \
     tzdata=2022f-r1 \
-    vim=8.2.5000-r0 \
-    zsh=5.8.1-r4
+    vim=9.0.0999-r0 \
+    zsh=5.9-r0
 
 # タイムゾーンの設定
 RUN cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
