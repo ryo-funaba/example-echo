@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go v1.44.215
 	github.com/friendsofgo/errors v0.9.2
 	github.com/google/go-cmp v0.5.9
-	github.com/labstack/echo/v4 v4.10.1
+	github.com/labstack/echo/v4 v4.10.2
 	github.com/pkg/errors v0.9.1
 	github.com/volatiletech/null/v8 v8.1.2
 	github.com/volatiletech/sqlboiler/v4 v4.14.1
