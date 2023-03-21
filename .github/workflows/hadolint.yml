@@ -1,11 +1,13 @@
-name: hadolint
+name: Hadolint
+
 on:
   pull_request:
     paths:
       - Dockerfile
+
 jobs:
   hadolint:
-    name: hadolint
+    name: Hadolint
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
