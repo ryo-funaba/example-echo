@@ -1,0 +1,51 @@
+name: CI
+
+on: [pull_request]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-go@v4
+        with:
+          go-version-file: "go.mod"
+          cache: true
+      - name: Download go modules
+        run: go mod download
+      - name: Compile go packages
+        run: go build -o example_echo cmd/main.go
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: reviewdog/action-golangci-lint@v2
+        with:
+          github_token: ${{ github.token }}
+          go_version_file: "go.mod"
+          golangci_lint_flags: "--config=.golangci.yml"
+          golangci_lint_version: "v1.51.1"
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    needs:
+      - build
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - uses: actions/setup-go@v4
+        with:
+          go-version-file: "go.mod"
+          cache: true
+      - name: Run tests
+        run: go test ./...
