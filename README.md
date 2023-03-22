@@ -1,5 +1,7 @@
 # example_echo
 
+[![CI](https://github.com/ryo-funaba/example-echo/actions/workflows/main.yml/badge.svg)](https://github.com/ryo-funaba/example-echo/actions/workflows/main.yml)
+
 このリポジトリは Go の Web フレームワークである echo のサンプルコードリポジトリです。
 
 ## ⚙️技術スタック
@@ -31,6 +33,7 @@
 - 前提条件
   - Docker(v20.10.17 以上) がインストールされていること
   - Docker compose(v2.7.0 以上) がインストールされていること
+  - Docker デスクトップアプリが起動していること
 
 1. リポジトリをクローン
 
@@ -50,14 +53,20 @@
    make setup
    ```
 
-   - API サーバーが Port 3000 で起動
-   - DB が Port 3306 で起動
+   - API サーバー
+     - ポート 3000 で起動
+     - 接続例：`http://localhost:3000`
+   - DB
+     - ポート 3306 で起動
+     - 接続例：`mysql --host=0.0.0.0 --port=3306 --user=user --password=password`
 
 4. 以上
 
 ## 🔍動作確認
 
-（これから書く）
+|内容|URL|HTTPメソッド|レスポンス|
+|----|----|----|----|
+|ヘルスチェック|/health_check|GET|{"message":"server is healthy"}|
 
 ## 💅Lint の実行
 
