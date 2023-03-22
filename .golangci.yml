@@ -57,6 +57,8 @@ linters-settings:
     multi-func: true
 
 issues:
+  exclude:
+    - internal/domain/model/
   exclude-rules:
     - linters:
         - revive
