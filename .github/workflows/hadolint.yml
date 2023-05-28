@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - Dockerfile
+  workflow_dispatch:
 
 jobs:
   hadolint:
@@ -12,8 +13,6 @@ jobs:
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
       - uses: hadolint/hadolint-action@v3.0.0
         with:
           ignore: DL4006
