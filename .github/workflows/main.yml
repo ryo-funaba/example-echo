@@ -1,6 +1,8 @@
 name: CI
 
-on: [pull_request]
+on:
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -9,8 +11,6 @@ jobs:
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-go@v4
         with:
           go-version-file: "go.mod"
@@ -25,8 +25,6 @@ jobs:
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
       - uses: reviewdog/action-golangci-lint@v2
         with:
           github_token: ${{ github.token }}
@@ -41,8 +39,6 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-go@v4
         with:
           go-version-file: "go.mod"
