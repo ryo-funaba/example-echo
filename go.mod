@@ -3,7 +3,7 @@ module github.com/ryo-funaba/example_echo
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go v1.44.289
+	github.com/aws/aws-sdk-go v1.44.290
 	github.com/friendsofgo/errors v0.9.2
 	github.com/google/go-cmp v0.5.9
 	github.com/labstack/echo/v4 v4.10.2
