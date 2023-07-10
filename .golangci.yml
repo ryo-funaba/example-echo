@@ -4,96 +4,123 @@ run:
 linters:
   disable-all: true
   enable:
+    - asasalint
     - asciicheck
     - bodyclose
-    - cyclop
-    - dogsled
-    - dupl
-    - durationcheck
+    - containedctx
+    - contextcheck
+    - decorder
     - errcheck
+    - errname
     - errorlint
     - exhaustive
     - exportloopref
-    - forcetypeassert
-    - funlen
     - gochecknoglobals
     - gocognit
-    - goconst
-    - gocyclo
     - gofmt
     - gofumpt
-    - goheader
     - goimports
-    - gomnd
-    - goprintffuncname
     - gosec
     - gosimple
     - govet
     - ineffassign
     - lll
-    - misspell
-    - nakedret
-    - nestif
     - noctx
-    - nolintlint
-    - prealloc
-    - revive
-    - staticcheck
-    - stylecheck
-    - typecheck
-    - unconvert
+    - tagalign
     - unparam
     - unused
-    - whitespace
     - wsl
 
 linters-settings:
-  funlen:
-    lines: -1
+  decorder:
+    dec-order:
+      - type
+      - const
+      - var
+      - func
+    disable-dec-order-check: false
+    disable-init-func-first-check: false
+    disable-dec-num-check: false
+  errcheck:
+    check-type-assertions: true
+    check-blank: true
+    disable-default-exclusions: false
+    exclude-functions:
+      - io/ioutil.ReadFile
+      - io.Copy(*bytes.Buffer)
+      - io.Copy(os.Stdout)
+  errorlint:
+    errorf: true
+    errorf-multi: true
+    asserts: true
+    comparison: true
+  exhaustive:
+    check:
+      - switch
+      - map
+    check-generated: false
+    default-signifies-exhaustive: false
+    package-scope-only: false
+    explicit-exhaustive-switch: false
+    explicit-exhaustive-map: false
+  gocognit:
+    min-complexity: 20
+  gofmt:
+    simplify: true
+    rewrite-rules:
+      - pattern: 'a[b:len(a)]'
+        replacement: 'a[b:]'
+  gofumpt:
+    extra-rules: true
+  gosec:
+    exclude-generated: true
+    severity: low
+    confidence: low
+  govet:
+    check-shadowing: true
+    enable-all: true
   lll:
-    line-length: 300
+    line-length: 140
+  tagalign:
+    align: true
+    sort: true
+    order:
+      - json
+      - yaml
+      - yml
+      - toml
+      - mapstructure
+      - binding
+      - validate
+  unparam:
+    check-exported: false
   whitespace:
     multi-if: true
     multi-func: true
 
 issues:
-  exclude:
-    - internal/domain/model/
   exclude-rules:
-    - linters:
-        - revive
-      text: "exported:"
-    - linters:
-        - revive
-      text: "unexported-return:"
-    - linters:
-        - revive
-      text: "package-comments: should have a package comment"
-    - linters:
-        - stylecheck
-      text: "ST1000:"
-    - path: internal/utils/errorutil/error.go
-      text: "mnd:"
+    - path: internal/config/
       linters:
-        - gomnd
-    - path: internal/infra/s3/mock_s3_repository.go
-      text: "var-naming:"
+        - decorder
+    - path: internal/domain/model/
       linters:
-        - revive
-    - path: internal/infra/s3/mock_s3_repository.go
-      text: "ST1003:"
+        - lll
+        - unused
+    - path: internal/infra/dynamodb/dynamodb_session.go
       linters:
-        - stylecheck
-    - path: internal/infra/dynamodb/dynamodb_repository_test.go
-      text: "ST1019"
+        - decorder
+    - path: internal/infra/mock/
       linters:
-        - stylecheck
-    - path: _handler\.go
+        - lll
+        - unused
+    - path: internal/infra/mysql/cluster.go
       linters:
-        - revive
+        - decorder
     - path: _test\.go
+      text: "fieldalignment"
       linters:
-        - dupl
+        - govet
   exclude-use-default: false
   max-issues-per-linter: 0
   max-same-issues: 0
