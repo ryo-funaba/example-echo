@@ -30,7 +30,6 @@ jobs:
           github_token: ${{ github.token }}
           go_version_file: "go.mod"
           golangci_lint_flags: "--config=.golangci.yml"
-          golangci_lint_version: "v1.51.1"
   test:
     name: Test
     runs-on: ubuntu-latest
