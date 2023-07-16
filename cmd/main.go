@@ -4,13 +4,10 @@ import (
 	"log"
 	"net/http"
 
-	adaptorHTTP "github.com/ryo-funaba/example_echo/internal/adapter/http"
 	"github.com/ryo-funaba/example_echo/internal/config"
 )
 
 func main() {
-	router := adaptorHTTP.InitRouter()
-
 	conf, err := config.LoadConfig()
 	if err != nil {
 		panic(err)
@@ -18,7 +15,6 @@ func main() {
 
 	s := &http.Server{
 		Addr:         conf.HTTPInfo.Addr,
-		Handler:      router,
 		ReadTimeout:  conf.HTTPInfo.ReadTimeout,
 		WriteTimeout: conf.HTTPInfo.WriteTimeout,
 	}

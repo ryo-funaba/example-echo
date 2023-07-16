@@ -74,7 +74,7 @@ dlint: ## Lint difference files
 	docker compose exec -it app golangci-lint run --config=.golangci.yml `$(call diff)`
 
 lint-docker: ## Lint dockerfile
-	docker run --rm -i hadolint/hadolint hadolint - --ignore DL4006 < Dockerfile
+	docker run --rm -i hadolint/hadolint hadolint - --ignore DL4006 --ignore DL3018 < Dockerfile
 
 test: ## Run go test
 	docker compose exec -it app zsh -c "go test ${TARGET_FILE}"

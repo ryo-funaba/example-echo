@@ -19,21 +19,21 @@ RUN GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -trimpath -o bin/app cmd/m
 FROM golang:1.20.1-alpine3.17 AS developer
 
 ARG AIR_VERSION=v1.41.0
-ARG GOLANG_CI_LINT_VERSION=v1.51.1
+ARG GOLANG_CI_LINT_VERSION=v1.53.3
 ARG GOLANG_MIGRATE_VERSION=v4.15.2
 ARG SQLBOILER_VERSION=v4.14.1
 
 RUN apk update && \
     apk --no-cache add \
-    curl=7.88.1-r0 \
-    gcc=12.2.1_git20220924-r4 \
-    git=2.38.4-r1 \
-    make=4.3-r1 \
-    musl-dev=1.2.3-r4 \
-    openssh=9.1_p1-r2 \
-    tzdata=2022f-r1 \
-    vim=9.0.0999-r0 \
-    zsh=5.9-r0
+    curl \
+    gcc \
+    git \
+    make \
+    musl-dev \
+    openssh \
+    tzdata \
+    vim \
+    zsh
 
 # タイムゾーンの設定
 RUN cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime

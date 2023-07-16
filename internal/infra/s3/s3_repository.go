@@ -11,11 +11,11 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3/s3iface"
 )
 
-const s3RepositoryStructName = "s3Repository"
-
 type s3Repository struct {
 	svc s3iface.S3API
 }
+
+const s3RepositoryStructName = "s3Repository"
 
 func NewS3Repository(svc s3iface.S3API) repository.S3Repository {
 	return &s3Repository{svc: svc}

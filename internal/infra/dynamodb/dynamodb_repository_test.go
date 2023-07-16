@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
 	"github.com/google/go-cmp/cmp"
+	"github.com/ryo-funaba/example_echo/internal/infra/mock"
 	"github.com/ryo-funaba/example_echo/internal/utils/errorutil"
 	"google.golang.org/protobuf/testing/protocmp"
 )
@@ -37,7 +38,7 @@ func Test_dynamodbRepository_GetItem(t *testing.T) {
 		{
 			name: "存在するテーブルとPKとSKを指定した場合、データが1件返される",
 			svc: func(t *testing.T) dynamodbiface.DynamoDBAPI {
-				return mockDynamodbRepository{Table: table, PK: pk, SK: sk}
+				return mock.MockDynamodbRepository{Table: table, PK: pk, SK: sk}
 			},
 			args: func() args {
 				return args{
@@ -62,7 +63,7 @@ func Test_dynamodbRepository_GetItem(t *testing.T) {
 		{
 			name: "存在しないテーブルを指定した場合、エラーが返される",
 			svc: func(t *testing.T) dynamodbiface.DynamoDBAPI {
-				return mockDynamodbRepository{Table: table, PK: pk, SK: sk}
+				return mock.MockDynamodbRepository{Table: table, PK: pk, SK: sk}
 			},
 			args: func() args {
 				return args{
@@ -87,7 +88,7 @@ func Test_dynamodbRepository_GetItem(t *testing.T) {
 		{
 			name: "存在しないPKを指定した場合、エラーが返される",
 			svc: func(t *testing.T) dynamodbiface.DynamoDBAPI {
-				return mockDynamodbRepository{Table: table, PK: pk, SK: sk}
+				return mock.MockDynamodbRepository{Table: table, PK: pk, SK: sk}
 			},
 			args: func() args {
 				return args{
@@ -112,7 +113,7 @@ func Test_dynamodbRepository_GetItem(t *testing.T) {
 		{
 			name: "存在しないSKを指定した場合、エラーが返される",
 			svc: func(t *testing.T) dynamodbiface.DynamoDBAPI {
-				return mockDynamodbRepository{Table: table, PK: pk, SK: sk}
+				return mock.MockDynamodbRepository{Table: table, PK: pk, SK: sk}
 			},
 			args: func() args {
 				return args{
@@ -176,7 +177,7 @@ func Test_dynamodbRepository_PutItem(t *testing.T) {
 		{
 			name: "存在するテーブルとPKとSKを指定した場合、データが1件返される",
 			svc: func(t *testing.T) dynamodbiface.DynamoDBAPI {
-				return mockDynamodbRepository{Table: table, PK: pk, SK: sk}
+				return mock.MockDynamodbRepository{Table: table, PK: pk, SK: sk}
 			},
 			args: func() args {
 				item := map[string]interface{}{
@@ -204,7 +205,7 @@ func Test_dynamodbRepository_PutItem(t *testing.T) {
 		{
 			name: "存在しないテーブルを指定した場合、エラーが返される",
 			svc: func(t *testing.T) dynamodbiface.DynamoDBAPI {
-				return mockDynamodbRepository{Table: table, PK: pk, SK: sk}
+				return mock.MockDynamodbRepository{Table: table, PK: pk, SK: sk}
 			},
 			args: func() args {
 				item := map[string]interface{}{
@@ -232,7 +233,7 @@ func Test_dynamodbRepository_PutItem(t *testing.T) {
 		{
 			name: "存在しないPKを指定した場合、エラーが返される",
 			svc: func(t *testing.T) dynamodbiface.DynamoDBAPI {
-				return mockDynamodbRepository{Table: table, PK: pk, SK: sk}
+				return mock.MockDynamodbRepository{Table: table, PK: pk, SK: sk}
 			},
 			args: func() args {
 				item := map[string]interface{}{
@@ -260,7 +261,7 @@ func Test_dynamodbRepository_PutItem(t *testing.T) {
 		{
 			name: "存在しないSKを指定した場合、エラーが返される",
 			svc: func(t *testing.T) dynamodbiface.DynamoDBAPI {
-				return mockDynamodbRepository{Table: table, PK: pk, SK: sk}
+				return mock.MockDynamodbRepository{Table: table, PK: pk, SK: sk}
 			},
 			args: func() args {
 				item := map[string]interface{}{
