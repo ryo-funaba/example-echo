@@ -47,10 +47,10 @@ tidy: ## Run go mod tidy
 	docker compose exec -it app go mod tidy
 
 start: ## Start a local server
-	docker compose exec -it app air
+	docker compose exec -it app air -c conf/.air.toml
 
 boil: ## Run SQLBoiler to generate a Go ORM
-	docker compose exec -it app sqlboiler mysql -c sqlboiler.toml
+	docker compose exec -it app sqlboiler mysql -c conf/sqlboiler.toml
 
 migrate-create: ## Create a set of up/down migrations titled $(f)
 	docker compose exec -it app migrate create -ext sql -dir db/migrations -seq $(f)
@@ -68,10 +68,10 @@ migrate-down-n: ## Apply $(n) down migrations and run `make boil`
 	docker compose exec -it app migrate -database="$(DB_DRIVER)://$(MYSQL_USER):$(MYSQL_PASSWORD)@tcp($(MYSQL_HOST):$(MYSQL_PORT))/$(MYSQL_DATABASE)?multiStatements=true" -path=db/migrations/ down $(n) && make boil
 
 lint: ## Lint all files
-	docker compose exec -it app golangci-lint run --config=.golangci.yml $(TARGET_FILE)
+	docker compose exec -it app golangci-lint run --config=conf/.golangci.yml $(TARGET_FILE)
 
 dlint: ## Lint difference files
-	docker compose exec -it app golangci-lint run --config=.golangci.yml `$(call diff)`
+	docker compose exec -it app golangci-lint run --config=conf/.golangci.yml `$(call diff)`
 
 lint-docker: ## Lint dockerfile
 	docker run --rm -i hadolint/hadolint hadolint - --ignore DL4006 --ignore DL3018 < Dockerfile
