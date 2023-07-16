@@ -10,11 +10,11 @@ import (
 	"github.com/ryo-funaba/example_echo/internal/utils/logutil"
 )
 
-const dynamodbRepositoryStructName = "dynamodbRepository"
-
 type dynamodbRepository struct {
 	svc dynamodbiface.DynamoDBAPI
 }
+
+const dynamodbRepositoryStructName = "dynamodbRepository"
 
 func NewDynamodbRepository(svc dynamodbiface.DynamoDBAPI) repository.DynamodbRepository {
 	return &dynamodbRepository{svc: svc}

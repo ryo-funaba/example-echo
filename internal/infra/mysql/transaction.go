@@ -9,11 +9,11 @@ import (
 	"github.com/ryo-funaba/example_echo/internal/utils/logutil"
 )
 
-const transactionStructName = "Transaction"
-
 type transaction struct {
 	rdb repository.Cluster
 }
+
+const transactionStructName = "Transaction"
 
 func NewTransaction(isDebugMode bool) repository.Transaction {
 	c := NewCluster(isDebugMode)
