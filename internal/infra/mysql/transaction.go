@@ -38,7 +38,7 @@ func (r *transaction) ExecTx(ctx context.Context, f func(ctx context.Context) er
 
 	err = f(c)
 	if err != nil {
-		if err := tx.Rollback(); err != nil {
+		if e := tx.Rollback(); e != nil {
 			return errorutil.Errorf(errorutil.Unknown, err.Error())
 		}
 
@@ -47,7 +47,7 @@ func (r *transaction) ExecTx(ctx context.Context, f func(ctx context.Context) er
 
 	err = tx.Commit()
 	if err != nil {
-		if err := tx.Rollback(); err != nil {
+		if e := tx.Rollback(); e != nil {
 			return errorutil.Errorf(errorutil.Unknown, err.Error())
 		}
 
