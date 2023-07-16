@@ -7,8 +7,8 @@ import (
 )
 
 type customError struct {
-	code Code
 	err  error
+	code Code
 }
 
 func ErrorCode(err error) int {
