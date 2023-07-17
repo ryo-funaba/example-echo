@@ -17,7 +17,7 @@ RUN cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 # 開発用ツールをインストール
 RUN go install github.com/cosmtrek/air@latest && \
     go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate@latest && \
-    wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin latest
+    wget -O- -nv https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b "$(go env GOPATH)"/bin latest
 
 COPY go.mod go.sum ./
 RUN go mod download
@@ -37,6 +37,6 @@ ENV TZ=Asia/Tokyo
 
 WORKDIR /app
 
-COPY --from=builder /app/bin ./
+COPY --from=developer /app/bin ./
 
 CMD ["./app"]
