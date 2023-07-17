@@ -47,10 +47,16 @@
    cd example_echo
    ```
 
-3. API サーバーと DB を起動
+3. 開発環境を構築
 
    ```bash
-   make setup
+   make install
+   ```
+
+4. API サーバーと DB を起動
+
+   ```bash
+   make run
    ```
 
    - API サーバー
@@ -59,8 +65,6 @@
    - DB
      - ポート 3306 で起動
      - 接続例：`mysql --host=0.0.0.0 --port=3306 --user=user --password=password`
-
-4. 以上
 
 ## 🔍動作確認
 
@@ -85,7 +89,7 @@
 - 差分対象
 
   ```bash
-  make dlint
+  make lint.diff
   ```
 
 ## 🧪テストの実行
@@ -93,13 +97,13 @@
 - 全ファイル対象
 
   ```bash
-  make test
+  make test.go
   ```
 
 - 特定ファイル対象
 
   ```bash
-  make test TARGET_FILE='ファイルの相対パス'
+  make test.go TARGET_FILE='ファイルの相対パス'
   ```
 
 ## 🏗️マイグレーションの実行
@@ -107,47 +111,50 @@
 - マイグレーションファイルの作成
 
   ```bash
-  make migrate-create f={migration_title}
+  make migrate.create f={migration_title}
   ```
 
 - マイグレーション（アップグレード）
 
   ```bash
-  make migrate-up
+  make migrate.up
   ```
 
 - マイグレーション（ダウングレード）
 
   ```bash
-  make migrate-down
+  make migrate.down
   ```
 
-## 💁‍♂️make コマンド一覧
+## 💁‍♂️Help
 
 ```bash
 $ make help
 
-help                 Show options
-setup                Create a container and migrate db and start a local server
-build                Build docker container
-up                   Do docker compose up in detached mode
-down                 Do docker compose down
-restart              Do docker compose restart
-logs                 Tail docker compose logs
-ps                   Check container status
-setEnv               Set Env to use SSH in Docker container
-exec                 Execute a command in a running app container
-build-go             Build go file
-clean                Remove binary files and cached files
-tidy                 Run go mod tidy
-start                Start a local server
-boil                 Run SQLBoiler to generate a Go ORM
-migrate-create       Create a set of timestamped up/down migrations titled $(f)
-migrate-up           Apply all up migrations
-migrate-up-n         Apply $(n) up migrations
-migrate-down         Apply all down migrations
-migrate-down-n       Apply $(n) down migrations
-lint                 Lint all files
-dlint                Lint difference files
-test                 Run go test
+help                                     make task の説明を表示する
+install                                  開発環境を構築する
+run                                      開発サーバーを起動する
+stop                                     開発サーバーを停止する
+restart                                  開発サーバーを再起動する
+refresh                                  開発サーバー初期化し、起動する
+destroy                                  開発サーバーを初期化する
+lint                                     全ファイルを対象に Lint を実行する
+lint.diff                                変更差分のあるファイルを対象に Lint を実行する
+lint.docker                              Dockerfile の Lint を実行する
+test.go                                  Go ファイルのテストを実行する
+build.go                                 Go ファイルのビルドを行う
+clean                                    バイナリとキャッシュを削除する
+tidy                                     go mod tidy を実行する
+migrate.create                           DB スキーマを変更するための migration ファイルを作成する
+migrate.up                               DB スキーマを最新に更新する
+migrate.up.n                             DB スキーマを $(n) 件分更新する
+migrate.down                             DB スキーマを全て削除する
+migrate.down.n                           DB スキーマを $(n) 件分削除する
+env                                      Docker container をビルドする際に必要な環境変数を設定する
+hot.reload                               ホットリロードを開始する
+exec                                     Docker container に入る
+docker.compose.build                     開発サーバーの環境構築を行う
+docker.compose.up                        開発サーバーを起動する
+docker.compose.down                      開発サーバーを停止する
+docker.compose.destroy                   開発サーバーを初期化する
 ```
