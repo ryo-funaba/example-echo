@@ -22,3 +22,6 @@ db/mysql/data/
 
 # temp folder
 tmp/
+
+# env file
+env/.env
