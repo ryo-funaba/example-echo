@@ -10,7 +10,7 @@ services:
     depends_on:
       - db
     env_file:
-      - local.env
+      - env/.env
     hostname: example_echo
     ports:
       - 3000:3000

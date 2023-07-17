@@ -2,12 +2,8 @@
 .vscode
 bin
 tmp
-.air.toml
 .DS_Store
 .git
 .gitignore
-.golangci.yml
-docker-compose.yml
 Makefile
 README.md
-sqlboiler.toml
