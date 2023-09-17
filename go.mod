@@ -3,7 +3,7 @@ module github.com/ryo-funaba/example_echo
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go v1.45.6
+	github.com/aws/aws-sdk-go v1.45.11
 	github.com/cosmtrek/air v1.44.0
 	github.com/friendsofgo/errors v0.9.2
 	github.com/golang-migrate/migrate/v4 v4.16.2
