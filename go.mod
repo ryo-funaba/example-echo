@@ -1,10 +1,12 @@
 module github.com/ryo-funaba/example_echo
 
-go 1.19
+go 1.21
+
+toolchain go1.21.3
 
 require (
 	github.com/aws/aws-sdk-go v1.47.3
-	github.com/cosmtrek/air v1.44.0
+	github.com/cosmtrek/air v1.49.0
 	github.com/friendsofgo/errors v0.9.2
 	github.com/golang-migrate/migrate/v4 v4.16.2
 	github.com/golangci/golangci-lint v1.55.1
