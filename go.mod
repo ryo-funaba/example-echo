@@ -11,6 +11,7 @@ require (
 	github.com/google/go-cmp v0.6.0
 	github.com/pkg/errors v0.9.1
 	github.com/volatiletech/null/v8 v8.1.2
+	github.com/volatiletech/null/v9 v9.0.0
 	github.com/volatiletech/sqlboiler/v4 v4.15.0
 	github.com/volatiletech/strmangle v0.0.5
 	google.golang.org/protobuf v1.31.0
