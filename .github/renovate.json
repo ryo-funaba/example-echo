@@ -5,6 +5,7 @@
     ":automergeMinor",
     ":prConcurrentLimitNone",
     ":prHourlyLimitNone",
+    "schedule:daily",
     "schedule:automergeDaily",
     ":separateMultipleMajorReleases",
     ":timezone(Asia/Tokyo)"
