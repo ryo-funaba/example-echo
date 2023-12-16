@@ -2,8 +2,11 @@
 .vscode
 bin
 tmp
+.dockerignore
 .DS_Store
 .git
 .gitignore
+docker-compose.yml
+Dockerfile
 Makefile
 README.md
