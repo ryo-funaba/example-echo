@@ -1,6 +1,6 @@
 DOCKER_COMPOSE_CMD := docker compose --env-file env/.env -f docker-compose.yml
 ATTACH_APP_CONTAINER := exec -it app
-LINT_CMD := golangci-lint run --config=conf/.golangci.yml
+LINT_CMD := golangci-lint run --config=config/.golangci.yml
 BASE_BRANCH := "main"
 TARGET_FILE := ./...
 
@@ -146,7 +146,7 @@ env:
 .PHONY: hot.reload ## ホットリロードを開始する
 hot.reload:
 	@printf "\033[1;33m[Hot Reload] Start\33[0m\n"; \
-	$(DOCKER_COMPOSE_CMD) $(ATTACH_APP_CONTAINER) air -c conf/.air.toml
+	$(DOCKER_COMPOSE_CMD) $(ATTACH_APP_CONTAINER) air -c config/.air.toml
 	@printf "\033[1;32m[Hot Reload] Finish\33[0m\n"
 
 .PHONY: exec ## Docker container に入る
