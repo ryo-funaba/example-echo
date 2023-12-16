@@ -1,6 +1,6 @@
 # example_echo
 
-[![CI](https://github.com/ryo-funaba/example-echo/actions/workflows/main.yml/badge.svg)](https://github.com/ryo-funaba/example-echo/actions/workflows/main.yml)
+[![CI](https://github.com/ryo-funaba/example-echo/actions/workflows/ci.yml/badge.svg)](https://github.com/ryo-funaba/example-echo/actions/workflows/ci.yml)
 
 このリポジトリは Go の Web フレームワークである echo のサンプルコードリポジトリです。
 
