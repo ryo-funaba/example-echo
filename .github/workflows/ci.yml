@@ -8,10 +8,12 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-      - uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5
+      - name: Run actions/checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - name: Run actions/setup-go
+        uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5
         with:
           go-version-file: "go.mod"
           cache: true
@@ -22,10 +24,12 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-      - uses: reviewdog/action-golangci-lint@94d61e3205b61acf4ddabfeb13c5f8a13eb4167b # v2
+      - name: Run actions/checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - name: Run reviewdog/action-golangci-lint
+        uses: reviewdog/action-golangci-lint@94d61e3205b61acf4ddabfeb13c5f8a13eb4167b # v2
         with:
           github_token: ${{ github.token }}
           go_version_file: "go.mod"
@@ -33,12 +37,12 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    timeout-minutes: 3
-    needs:
-      - build
+    timeout-minutes: 5
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
-      - uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5
+      - name: Run actions/checkout
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+      - name: Run actions/setup-go
+        uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5
         with:
           go-version-file: "go.mod"
           cache: true
