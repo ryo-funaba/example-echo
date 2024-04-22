@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Run actions/checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
       - name: Run actions/setup-go
         uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5
         with:
@@ -27,7 +27,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Run actions/checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
       - name: Run reviewdog/action-golangci-lint
         uses: reviewdog/action-golangci-lint@00311c26a97213f93f2fd3a3524d66762e956ae0 # v2
         with:
@@ -40,7 +40,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Run actions/checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
       - name: Run actions/setup-go
         uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5
         with:
