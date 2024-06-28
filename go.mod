@@ -5,7 +5,7 @@ go 1.22
 toolchain go1.22.4
 
 require (
-	github.com/aws/aws-sdk-go v1.49.24
+	github.com/aws/aws-sdk-go v1.54.11
 	github.com/cosmtrek/air v1.50.0
 	github.com/friendsofgo/errors v0.9.2
 	github.com/golang-migrate/migrate/v4 v4.17.1
