@@ -2,7 +2,7 @@ module github.com/ryo-funaba/example_echo
 
 go 1.22
 
-toolchain go1.22.5
+toolchain go1.22.6
 
 require (
 	github.com/aws/aws-sdk-go v1.49.24
