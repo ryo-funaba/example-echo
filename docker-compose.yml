@@ -20,7 +20,7 @@ services:
     working_dir: /app/example_echo
 
   db:
-    image: mysql:8.4.3@sha256:6bc3ac72e858ad6ecb651229520fe14848b885ed01b3f08e2b201a25a5f49476
+    image: mysql:9.1.0@sha256:2be51594eba5983f47e67ff5cb87d666a223e309c6c64450f30b5c59a788ea40
     container_name: twitter_db
     environment:
       MYSQL_ROOT_PASSWORD: mysql
