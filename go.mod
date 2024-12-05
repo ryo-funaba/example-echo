@@ -6,7 +6,7 @@ toolchain go1.23.4
 
 require (
 	github.com/aws/aws-sdk-go v1.49.24
-	github.com/cosmtrek/air v1.50.0
+	github.com/cosmtrek/air v1.61.1
 	github.com/friendsofgo/errors v0.9.2
 	github.com/golang-migrate/migrate/v4 v4.18.1
 	github.com/golangci/golangci-lint v1.62.2
