@@ -117,6 +117,10 @@ func (m MockDynamodbRepository) DeleteItemRequest(*dynamoDB.DeleteItemInput) (*r
 	return nil, nil
 }
 
+func (m *MockDynamodbRepository) DeleteResourcePolicy(*dynamodb.DeleteResourcePolicyInput) (*dynamodb.DeleteResourcePolicyOutput, error) {
+	return nil, nil
+}
+
 func (m MockDynamodbRepository) DeleteTable(*dynamoDB.DeleteTableInput) (*dynamoDB.DeleteTableOutput, error) {
 	return nil, nil
 }
