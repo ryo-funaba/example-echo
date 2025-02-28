@@ -14,7 +14,6 @@ linters:
     - errname
     - errorlint
     - exhaustive
-    - exportloopref
     - gochecknoglobals
     - gocognit
     - gofmt
@@ -77,7 +76,6 @@ linters-settings:
     severity: low
     confidence: low
   govet:
-    check-shadowing: true
     enable-all: true
   lll:
     line-length: 140
