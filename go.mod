@@ -9,7 +9,7 @@ require (
 	github.com/cosmtrek/air v1.50.0
 	github.com/friendsofgo/errors v0.9.2
 	github.com/golang-migrate/migrate/v4 v4.18.2
-	github.com/golangci/golangci-lint v1.64.7
+	github.com/golangci/golangci-lint v1.64.8
 	github.com/google/go-cmp v0.7.0
 	github.com/pkg/errors v0.9.1
 	github.com/volatiletech/null/v8 v8.1.2
